@@ -1,31 +1,358 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR AI Suite</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-        h1 {
-            color: #111111;
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-            margin: 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR AI Suite | أدوات ذكية لمسيرتك المهنية</title>
+  <meta name="description" content="اكتشف أدوات HR AI Suite لبناء سيرتك الذاتية وتحسينها والاستعداد لمستقبلك المهني.">
+  <meta name="theme-color" content="#070b16">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070b16;
+      --border: rgba(148, 163, 184, .16);
+      --text: #eef2ff;
+      --muted: #9aa8bd;
+      --blue: #38bdf8;
+      --green: #34d399;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 50% -10%, rgba(56,189,248,.18), transparent 42%),
+        radial-gradient(ellipse at 100% 35%, rgba(124,58,237,.12), transparent 35%),
+        var(--bg);
+    }
+
+    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 26px 0;
+    }
+
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+
+    .brand-mark {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border: 1px solid rgba(56,189,248,.38);
+      border-radius: 14px;
+      color: var(--blue);
+      background: rgba(56,189,248,.1);
+      font-size: 22px;
+      box-shadow: 0 0 28px rgba(56,189,248,.12);
+    }
+
+    .brand-name, .brand-caption { display: block; }
+    .brand-name { font-size: 17px; font-weight: 750; }
+    .brand-caption { margin-top: 2px; color: var(--muted); font-size: 12px; }
+
+    .language-link {
+      padding: 9px 14px;
+      border: 1px solid rgba(148,163,184,.2);
+      border-radius: 999px;
+      color: #cbd5e1;
+      background: rgba(15,23,42,.72);
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .language-link:hover { border-color: rgba(56,189,248,.5); color: var(--blue); }
+
+    .hero { padding: 56px 0 48px; text-align: center; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: #cbd5e1;
+      background: rgba(15,23,42,.72);
+      font-size: 13px;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(52,211,153,.8);
+    }
+
+    h1 { margin: 22px 0 14px; font-size: clamp(36px, 7vw, 64px); line-height: 1.2; }
+    h1 span { color: var(--blue); }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(15px, 2vw, 18px);
+      line-height: 1.9;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 16px 0 22px;
+    }
+
+    .section-heading h2 { margin: 0; font-size: 23px; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      padding-bottom: 32px;
+    }
+
+    .project-card {
+      position: relative;
+      display: flex;
+      min-height: 265px;
+      flex-direction: column;
+      padding: 23px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(20,31,54,.86), rgba(8,13,27,.92));
+      box-shadow: 0 18px 45px rgba(0,0,0,.18);
+      transition: transform 160ms ease, border-color 160ms ease;
+    }
+
+    .project-card::before {
+      position: absolute;
+      top: -70px;
+      left: -60px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: var(--glow, rgba(56,189,248,.14));
+      filter: blur(35px);
+      content: "";
+      pointer-events: none;
+    }
+
+    .project-card:hover { transform: translateY(-4px); border-color: rgba(56,189,248,.42); }
+    .card-top, .project-card h3, .project-card p, .card-link { position: relative; }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .project-icon {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border: 1px solid rgba(148,163,184,.16);
+      border-radius: 15px;
+      background: rgba(15,23,42,.8);
+      font-size: 23px;
+    }
+
+    .category {
+      padding: 6px 10px;
+      border: 1px solid rgba(148,163,184,.15);
+      border-radius: 999px;
+      color: #b7c3d6;
+      background: rgba(15,23,42,.7);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .project-card h3 { margin: 0 0 9px; font-size: 19px; }
+
+    .project-card p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .card-link span { transition: transform 160ms ease; }
+    .card-link:hover span { transform: translateX(-4px); }
+
+    .note {
+      margin: 0 0 52px;
+      padding: 16px 18px;
+      border: 1px solid rgba(56,189,248,.18);
+      border-radius: 14px;
+      color: #b8c5d8;
+      background: rgba(56,189,248,.055);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    footer {
+      padding: 22px 0 30px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 850px) {
+      .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(100% - 28px, 440px); }
+      header { padding: 18px 0; }
+      .hero { padding: 42px 0 36px; }
+      .section-heading { align-items: flex-start; flex-direction: column; }
+      .projects { grid-template-columns: 1fr; gap: 14px; }
+      .project-card { min-height: 240px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>HR AI Suite</h1>
+  <header class="container">
+    <a class="brand" href="https://hr-ai-suite-lime.vercel.app/" aria-label="HR AI Suite - الرئيسية">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span>
+        <span class="brand-name">HR AI Suite</span>
+        <span class="brand-caption">أدوات ذكية لمسيرتك المهنية</span>
+      </span>
+    </a>
+    <a class="language-link" href="https://hr-ai-suite-2.vercel.app/" lang="en">English</a>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>أدوات ذكية لمستقبلك المهني</span>
+      </div>
+      <h1>HR AI Suite</h1>
+      <p>
+        اكتشف أدوات HR AI Suite التي تساعدك على بناء سيرتك الذاتية وتحسينها،
+        والاستعداد للمقابلات، والعثور على فرصتك المهنية القادمة.
+      </p>
+    </section>
+
+    <section class="container" aria-labelledby="projects-title">
+      <div class="section-heading">
+        <h2 id="projects-title">مشاريعنا</h2>
+        <p>اختر الأداة المناسبة لاحتياجك</p>
+      </div>
+
+      <div class="projects">
+        <article class="project-card" style="--glow:rgba(56,189,248,.18)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">🎤</div>
+            <span class="category">المقابلات الوظيفية</span>
+          </div>
+          <h3>AI Interview Simulator</h3>
+          <p>تدرّب على المقابلات بأسئلة واقعية واحصل على تقييم لإجاباتك.</p>
+          <a class="card-link" href="https://ai-interview-simulator-exact.vercel.app/" target="_blank" rel="noopener noreferrer">
+            استكشف المشروع <span aria-hidden="true">←</span>
+          </a>
+        </article>
+
+        <article class="project-card" style="--glow:rgba(52,211,153,.16)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">✅</div>
+            <span class="category">توافق ATS</span>
+          </div>
+          <h3>PassATS AI</h3>
+          <p>حلّل توافق سيرتك الذاتية مع متطلبات الوظيفة وأنظمة تتبع المتقدمين.</p>
+          <a class="card-link" href="https://pass-ats-ai-exact.vercel.app/" target="_blank" rel="noopener noreferrer">
+            استكشف المشروع <span aria-hidden="true">←</span>
+          </a>
+        </article>
+
+        <article class="project-card" style="--glow:rgba(167,139,250,.17)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">🌍</div>
+            <span class="category">سيرة ذاتية متعددة اللغات</span>
+          </div>
+          <h3>PolyCV AI</h3>
+          <p>أنشئ سيرة ذاتية احترافية بلغات متعددة من معلوماتك وخبراتك.</p>
+          <a class="card-link" href="https://poly-cv-ai-exast.vercel.app/" target="_blank" rel="noopener noreferrer">
+            استكشف المشروع <span aria-hidden="true">←</span>
+          </a>
+        </article>
+
+        <article class="project-card" style="--glow:rgba(251,191,36,.14)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">✨</div>
+            <span class="category">إنشاء السيرة الذاتية</span>
+          </div>
+          <h3>ProfileUp AI</h3>
+          <p>حوّل معلوماتك وخبراتك إلى سيرة ذاتية احترافية ومنظمة.</p>
+          <a class="card-link" href="https://profile-up-ai-exact.vercel.app/" target="_blank" rel="noopener noreferrer">
+            استكشف المشروع <span aria-hidden="true">←</span>
+          </a>
+        </article>
+
+        <article class="project-card" style="--glow:rgba(244,114,182,.15)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">🔎</div>
+            <span class="category">تحليل المرشحين</span>
+          </div>
+          <h3>Smart Recruiters AI</h3>
+          <p>حلّل السير الذاتية واستخرج المهارات والخبرات لمساعدة فرق التوظيف.</p>
+          <a class="card-link" href="https://smart-recruiters-ai-exact.vercel.app/" target="_blank" rel="noopener noreferrer">
+            استكشف المشروع <span aria-hidden="true">←</span>
+          </a>
+        </article>
+
+        <article class="project-card" style="--glow:rgba(45,212,191,.15)">
+          <div class="card-top">
+            <div class="project-icon" aria-hidden="true">📝</div>
+            <span class="category">ملخصات الموارد البشرية</span>
+          </div>
+          <h3>HR Brief AI</h3>
+          <p>لخّص تقارير الموارد البشرية الطويلة واستخرج أبرز النقاط والتوصيات.</p>
+          <a class="card-link" href="https://hr-brief-ai-exact.vercel.app/" target="_blank" rel="noopener noreferrer">
+            استكشف المشروع <span aria-hidden="true">←</span>
+          </a>
+        </article>
+      </div>
+
+      <p class="note">ملاحظة: صفحة PolyCV AI متاحة باللغة الإنجليزية فقط.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 HR AI Suite — أدوات ذكية لمسيرتك المهنية</div>
+  </footer>
 </body>
 </html>
